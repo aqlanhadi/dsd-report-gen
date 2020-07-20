@@ -1,6 +1,12 @@
 const Report = require('./Report')
 
-module.exports.handle = (response) => {
-    const report = new Report(response)
+module.exports.handle = async (response) => {
+    const report = new Report()
+
+    report.initialize(response)
+        .then(async () => {
+            return await report.sendEmail()
+        })
+
     return 0
 }

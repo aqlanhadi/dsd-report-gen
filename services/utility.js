@@ -1,3 +1,21 @@
+/**
+ * ===================================================================== *
+ *                              DEFINITIONS                              *
+ * ===================================================================== *
+ */
+
+const TRANSPORT_RESPONSE = {
+    "less than RM10": 10,
+    "RM10-50": 50,
+    "more than RM50": 100,
+    "never calculated": 200
+}
+
+ /**
+  * ======================================================================
+  */
+
+
 module.exports.extractor = async (response) => {
     return Promise.resolve({
         name: response.hidden.name,
@@ -10,7 +28,7 @@ module.exports.extractor = async (response) => {
         },
         spentOn:{
             "groceries": parseInt(response.hidden.grt),
-            "transport": response.hidden.trt,
+            "transport": parseInt(parseTransport(response.hidden.trt)),
             "eatingOut": parseInt(response.hidden.eot),
             "hobbies": parseInt(response.hidden.ht),
             "lifestyle": parseInt(response.hidden.lt)
@@ -33,6 +51,10 @@ module.exports.extractor = async (response) => {
             "district": response.answers[10].choice.label
         }
     })
+}
+
+function parseTransport(res) {
+    return TRANSPORT_RESPONSE[res]
 }
 
 function parseScore(from, data) {

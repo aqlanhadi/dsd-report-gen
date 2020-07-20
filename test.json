@@ -1,0 +1,27 @@
+{
+    name: 'test',
+    email: 'test@email.com',
+    scores: { groceries: 2, transport: 2, eatingOut: 2, lifestyle: 3 },
+    spentOn: {
+      groceries: 200,
+      transport: 'less than RM10',
+      eatingOut: 20,
+      hobbies: 12,
+      lifestyle: 12
+    },
+    income: {
+      savePercentage: "I don't have enough to save",
+      purchasePower: 'Yes',
+      income: 'RM2,000 or less'
+    },
+    debt: { loan_status: 'Yes', loan_list: 0, service_pct: 'Lower than 20%' },
+    demographics: {
+      age: '18 or younger',
+      employment_status: 'Employed full-time',
+      education_level: 'Less than High School',
+      state: 'Kedah',
+      district: 'Alor Setar'
+    },
+    profile: 1,
+    debtIncomeRatio: { debtRatio: 0, incomeRatio: 0, health: 'OK' }
+  }

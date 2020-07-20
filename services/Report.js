@@ -1,16 +1,27 @@
-var utility = require('./utility')
-var profiler = require('./profiler')
+const utility = require('./utility')
+const profiler = require('./profiler')
+const mailer = require('./mailer')
 
 class Report {
 
     data = {}
 
-    constructor(body) {
+    constructor() {
         console.log(`Profiler invoked.`)
-        this.data = utility.extractor(body)
+    }
+
+    async initialize(body) {
+        return await utility.extractor(body)
             .then(async (extractedData) => {
-                profiler.profile(extractedData)
-            })
+                return await profiler.profile(extractedData)
+            }).then(async (profile) => {
+                this.data = profile
+                return Promise.resolve(this.data)
+            }).catch((e) => {console.error(e)})
+    }
+
+    async sendEmail() {
+        return Promise.resolve(mailer.send(this.data))
     }
 }
 
