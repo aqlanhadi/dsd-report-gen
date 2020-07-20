@@ -1,0 +1,16 @@
+{
+  "name": "dsd-report-gen",
+  "version": "0.0.1",
+  "description": "Maybank's Digital Skills Development survey report generator.",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aqlan Nor Azman",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "serverless-http": "^2.5.0"
+  }
+}

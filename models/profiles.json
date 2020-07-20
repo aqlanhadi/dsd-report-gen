@@ -1,0 +1,66 @@
+[
+    {
+        "level": 1,
+        "name": "Savers",
+        "defined_by": "A tendency to spend generously on others",
+        "means_for_money": "Spreading the financial love with others may stretch you thin with little money left to save",
+        "tips": [
+            {
+                "title": "Launch a money-saving challenge",
+                "description": "Give friends and family a heads-up that you’re focusing on saving and ask them to join in. When your tendency to treat others arises, you’ll have a support system helping to curb the behavior"
+            },
+            {
+                "title": "Give yourself spending limits for gifts",
+                "description": "Shopping with only a set amount of cash on hand may help to keep overspending inclinations in check"
+            }
+        ]
+    },
+    {
+        "level": 2,
+        "name": "Shopper",
+        "defined_by": "Spending that’s driven by a desire to keep up with the latest trends",
+        "means_for_money": "The focus on right now can potentially leave you unprepared for emergencies or longer-term goals such as retirement",
+        "tips": [
+            {
+                "title": "Institute a 48-hour rule before you buy",
+                "description": "Delaying gratification gives you a cooling-off period to think the purchase through and determine if it’s something you really need"
+            },
+            {
+                "title": "Consider using a shopping app that tracks items on your to-buy list",
+                "description": "Look for one that shoots you a heads-up when a must-have item goes on sale"
+            }
+        ]
+    },
+    {
+        "level": 3,
+        "name": "Big Spender",
+        "defined_by": "Buying smaller items you don’t necessarily need, on impulse",
+        "means_for_money": "Small purchases can eventually add up to one big shortfall in your savings plan",
+        "tips": [
+            {
+                "title": "Create a savings match",
+                "description": "Each time you spend $5 on a magazine or $2 on a candy bar, transfer that same amount to your savings"
+            },
+            {
+                "title": "Check retailer return policies",
+                "description": "Consider using apps to help keep track of purchases and receipts — which typically include return policies — so you can view them at a glance"
+            }
+        ]
+    },
+    {
+        "level": 4,
+        "name": "Debtor",
+        "defined_by": "Buying smaller items you don’t necessarily need, on impulse",
+        "means_for_money": "Small purchases can eventually add up to one big shortfall in your savings plan",
+        "tips": [
+            {
+                "title": "Create a savings match",
+                "description": "Each time you spend $5 on a magazine or $2 on a candy bar, transfer that same amount to your savings"
+            },
+            {
+                "title": "Check retailer return policies",
+                "description": "Consider using apps to help keep track of purchases and receipts — which typically include return policies — so you can view them at a glance"
+            }
+        ]
+    }
+]
