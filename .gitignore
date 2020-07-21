@@ -105,4 +105,10 @@ dist
 .tern-port
 
 #REST Client
-*.http
+requests.http
+
+#Serverless
+.serverless
+
+#Custom
+test.json
