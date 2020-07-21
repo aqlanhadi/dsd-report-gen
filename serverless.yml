@@ -1,4 +1,6 @@
 service: dsd-report-gen
+plugins:
+  - serverless-dotenv-plugin
 
 provider:
   name: aws

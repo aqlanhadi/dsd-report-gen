@@ -9,14 +9,16 @@ app.use(bodyParser.json())
 
 const PORT = process.env.PORT || 3000
 
-app.post('/hook', (req, res) => {
+app.post('/hook', async (req, res) => {
     
     //console.log(req.body)
-    responseHandler.handle(req.body.form_response)
-
-    res.send({
-        status: 200,
-        body: `Response received.`
+    await responseHandler.handle(req.body.form_response)
+    .then(() => {
+        console.log(`Service completed.`)
+        res.send({
+            status: 200,
+            body: `Response processed.`
+        })
     })
 })
 

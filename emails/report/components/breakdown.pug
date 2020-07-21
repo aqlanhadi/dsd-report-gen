@@ -1,0 +1,41 @@
+h4.title.is-4 Breakdown
+
+p.subtitle.is-6 Your expenses includes the following
+
+nav.level.is-mobile
+    div.level-item.has-text-centered
+        div
+            p.heading Groceries
+            p.title #{breakdown.groceries}%
+    div.level-item.has-text-centered
+        div
+            p.heading Transportation
+            p.title #{breakdown.transport}%
+    div.level-item.has-text-centered
+        div
+            p.heading Eating Out
+            p.title #{breakdown.eatingOut}%
+    div.level-item.has-text-centered
+        div
+            p.heading Hobbies &amp Lifestyle
+            p.title #{breakdown.lifestyle}%
+
+p.subtitle.is-6 which accumulates for #{breakdown.usage}% of your income. View further breakdown below.
+
+div.columns.is-mobile
+    div.column.is-one-quarter Spent
+    div.column.is-half
+        progress.progress.is-danger.is-small(value=breakdown.usage, max=100)
+    div.column #{breakdown.usage}%
+
+div.columns.is-mobile
+    div.column.is-one-quarter Debt Servicing
+    div.column.is-half
+        progress.progress.is-warning.is-small(value=breakdown.debt, max=100)
+    div.column #{breakdown.debt}%
+
+div.columns.is-mobile
+    div.column.is-one-quarter Excess
+    div.column.is-half
+        progress.progress.is-primary.is-small(value=breakdown.excess, max=100)
+    div.column #{breakdown.excess}%

@@ -12,6 +12,12 @@
       "region": "ap-southeast-1",
       "versionFunctions": true,
       "remoteFunctionData": null,
+      "environment": {
+        "MAIL_HOST": "smtp.mailtrap.io",
+        "MAIL_PORT": "2525",
+        "MAIL_USER": "46be50762b5c5f",
+        "MAIL_PASS": "2e7d93f73e0aad"
+      },
       "compiledCloudFormationTemplate": {
         "AWSTemplateFormatVersion": "2010-09-09",
         "Description": "The AWS CloudFormation template for this Serverless application",
@@ -160,7 +166,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/dsd-report-gen/dev/1595219428254-2020-07-20T04:30:28.254Z/dsd-report-gen.zip"
+                "S3Key": "serverless/dsd-report-gen/dev/1595332056077-2020-07-21T11:47:36.077Z/dsd-report-gen.zip"
               },
               "FunctionName": "dsd-report-gen-dev-app",
               "Handler": "handler.handler",
@@ -172,20 +178,28 @@
                 ]
               },
               "Runtime": "nodejs12.x",
-              "Timeout": 6
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "MAIL_HOST": "smtp.mailtrap.io",
+                  "MAIL_PORT": "2525",
+                  "MAIL_USER": "46be50762b5c5f",
+                  "MAIL_PASS": "2e7d93f73e0aad"
+                }
+              }
             },
             "DependsOn": [
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersion6oh6gH1I8v0IQsSSjHXVA0sgTtQKKPQGdsLQUo3kdI": {
+          "AppLambdaVersionKxa7pLQ1YuCceZjWWrWpkH5bKoXKN6bKgxJu7MLmgYo": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "ulafBB/b/ipzJn8asbBraB9Hzt6TtUZ+xzlyszdEGIc="
+              "CodeSha256": "HqoUudCgkUVXsBjvNyXdV6P97/cWarVqnaGuk6A+tHA="
             }
           },
           "ApiGatewayRestApi": {
@@ -304,7 +318,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1595219425335": {
+          "ApiGatewayDeployment1595332047556": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -364,7 +378,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersion6oh6gH1I8v0IQsSSjHXVA0sgTtQKKPQGdsLQUo3kdI"
+              "Ref": "AppLambdaVersionKxa7pLQ1YuCceZjWWrWpkH5bKoXKN6bKgxJu7MLmgYo"
             }
           },
           "ServiceEndpoint": {
@@ -461,6 +475,9 @@
       },
       "vpc": {}
     },
+    "plugins": [
+      "serverless-dotenv-plugin"
+    ],
     "pluginsData": {},
     "functions": {
       "app": {
@@ -479,7 +496,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersion6oh6gH1I8v0IQsSSjHXVA0sgTtQKKPQGdsLQUo3kdI"
+        "versionLogicalId": "AppLambdaVersionKxa7pLQ1YuCceZjWWrWpkH5bKoXKN6bKgxJu7MLmgYo"
       }
     },
     "serviceFilename": "serverless.yml",
@@ -488,7 +505,7 @@
     "artifact": "/Users/aqlanhadi/Developer/node/dsd-report-gen/.serverless/dsd-report-gen.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/dsd-report-gen/dev/1595219428254-2020-07-20T04:30:28.254Z",
+    "artifactDirectoryName": "serverless/dsd-report-gen/dev/1595332056077-2020-07-21T11:47:36.077Z",
     "artifact": "dsd-report-gen.zip"
   }
 }

@@ -1,10 +1,30 @@
-h1 Hello #{name}
-p Thank you for participating
-p Responses:
-p Name: #{name}
-p Email: #{email}
+doctype html
+html
+    head
+        link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        style
+            include styles/custom.css
+    body
+        section.section
+            div.container
+                h3.title.is-3 Hello #{name}
+                p.subtitle.is-5.is-spaced Thank you for participating in our survey. Here is your financial summary.
 
-p Profile: #{profile}
-p Debt Ratio: #{debtIncomeRatio.debtRatio}
-p Income Ratio: #{debtIncomeRatio.incomeRatio}
-p DIR Health: #{debtIncomeRatio.health}
+                div.notification.is-warning The calculated values are approximates based on your responses.
+
+                include components/profile.pug
+                
+                include components/breakdown.pug
+                
+                include components/debtIncomeRatio.pug
+                        
+                include components/tips.pug
+                
+                br
+                p.subtitle.is-6.is-spaced.
+                    Follow us on Instagram at #[a(href='https://www.instagram.com/halduit/') @halduit] for more financial tips and tricks! Share this questionnaires among your friends and family and find out how they rank against you! Happy Saving!
+
+                p.subtitle.is-6.is-italic - The HalDuit Team
+
+        include components/footer.pug

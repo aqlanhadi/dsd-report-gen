@@ -4,7 +4,8 @@
   "description": "Maybank's Digital Skills Development survey report generator.",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "local": "NODE_ENV=development sls invoke local -f app"
   },
   "author": "Aqlan Nor Azman",
   "license": "MIT",
@@ -14,5 +15,8 @@
     "express": "^4.17.1",
     "pug": "^3.0.0",
     "serverless-http": "^2.5.0"
+  },
+  "devDependencies": {
+    "serverless-dotenv-plugin": "^2.4.2"
   }
 }

@@ -1,32 +1,34 @@
 const Email = require('email-templates')
 
-module.exports.send = (data) => {
+module.exports.send = async (data) => {
     console.log(data)
     const email = new Email({
         message: {
             from: 'hi@test.com'
         },
-        send: false,
-        open: true,
+        send: true,
         transport: {
-            host: 'smtp.mailtrap.io',
-            port: 2525,
+            host: process.env.MAILTRAP_HOST,
+            port: process.env.MAILTRAP_PORT,
             ssl: false,
             tls: true,
             auth: {
-                user: '46be50762b5c5f',
-                pass: '2e7d93f73e0aad'
+                user: process.env.MAILTRAP_USER,
+                pass: process.env.MAILTRAP_PASS
             }
         }
         
     })
 
-    email.send({
+    return await email.send({
         template: 'report',
         message: {
             to: data.email
         },
         locals: data
+    })
+    .then((log) => {
+        console.log(`Status => `, log.response)
     })
     .catch(console.error)
 }

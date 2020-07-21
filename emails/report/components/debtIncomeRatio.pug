@@ -1,0 +1,19 @@
+- var answered = debtIncomeRatio.answered
+
+h4.title.is-4 Debt-Income Ratio
+unless answered === false
+    nav.level.is-mobile
+        div.level-item.has-text-centered
+            div
+                p.heading Debt
+                p.title #{debtIncomeRatio.debtRatio}%
+        div.level-item.has-text-centered
+            div
+                p.heading Income
+                p.title #{debtIncomeRatio.incomeRatio}%
+        div.level-item.has-text-centered
+            div
+                p.heading DIR Health
+                p.title #{debtIncomeRatio.health}
+else 
+    p.is-spaced You did not provide us with sufficient information for us to be able to calculate your Debt-Income Ratio.

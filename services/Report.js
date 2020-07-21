@@ -16,12 +16,13 @@ class Report {
                 return await profiler.profile(extractedData)
             }).then(async (profile) => {
                 this.data = profile
+                console.log(`Response profiled.`)
                 return Promise.resolve(this.data)
             }).catch((e) => {console.error(e)})
     }
 
     async sendEmail() {
-        return Promise.resolve(mailer.send(this.data))
+        return await mailer.send(this.data)
     }
 }
 

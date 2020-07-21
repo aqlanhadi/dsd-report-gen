@@ -15,19 +15,9 @@ const INCOME_DEF = {
     'I prefer not to answer': -1
 }
 
-const LOAN_DEF = {
-    'Lower than 20%': .1,
-    '20%-40%': .3,
-    '20%-40%': .7,
-    'I prefer not to answer': -1
-}
-
 /**
  * ======================================================================
  */
-
-
-
 
 module.exports.profile = async (data) => {
     console.log('Profiler received data')
@@ -37,11 +27,10 @@ module.exports.profile = async (data) => {
         debtIncomeRatio: {}
     }
 
-    res.profile = profiler(data.scores)
+    res.profile = PROFILE_DEFINITION[profiler(data.scores)-1]
     res.debtIncomeRatio = getDIR(data.debt.service_pct)
     
-    console.log(res)
-    return Promise.resolve(Object.assign({}, data, profiler))
+    return Promise.resolve(Object.assign({}, data, res))
 }
 
 function profiler(scores) {
@@ -73,22 +62,25 @@ function profiler(scores) {
 }
 
 function getDIR(loan) {
-    var loanpc = LOAN_DEF[loan]
+    var loanpc = loan
     var debtRatio = 0
     var incomeRatio = 0
     var health = 'Not specified'
+    var answered = false
     if(loanpc != -1) {
-        var debtRatio = LOAN_DEF[loan] * 100
+        answered = true
+        var debtRatio = loanpc * 100
         var incomeRatio = 100 - debtRatio
         if (debtRatio < 30 ) health = 'Healthy'
         else if (debtRatio < 50) health = 'At Risk'
         else if (debtRatio < 100) health = 'Very Risky'
         return {
+            answered,
             health,
             debtRatio,
             incomeRatio,
         }
     } else {
-        return { health }
+        return { answered }
     }
 }
