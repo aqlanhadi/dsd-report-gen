@@ -1,0 +1,22 @@
+- var tips = profile.tips
+
+table.row
+    tbody
+        tr 
+            th.columns.first.last.header
+                table
+                    tr
+                        th 
+                            h5 <strong>Tips on Managing Your Money</strong>
+        
+        each tip in tips
+            tr 
+                th.columns.first.last
+                    table
+                        tr
+                            th <strong>#{tip.title}:</strong> #{tip.description}
+        
+        tr
+            th.spacer
+        tr
+            th.spacer

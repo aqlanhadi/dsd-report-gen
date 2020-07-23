@@ -1,0 +1,22 @@
+.header {
+    padding-bottom: 0px !important;
+}
+
+.label {
+    text-transform: uppercase;
+    font-size: small;
+    color: dimgray;
+}
+
+.footer {
+    font-size: xx-small;
+    color: dimgray;
+}
+
+.pct {
+    text-transform: uppercase;
+}
+
+.last-element {
+    padding-bottom: 48px;
+}

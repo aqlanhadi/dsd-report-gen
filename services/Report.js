@@ -11,6 +11,7 @@ class Report {
     }
 
     async initialize(body) {
+        //console.log('Received Data:', body)
         return await utility.extractor(body)
             .then(async (extractedData) => {
                 return await profiler.profile(extractedData)

@@ -1,0 +1,103 @@
+table.row
+    tbody
+        tr 
+            th.columns.first.last.header
+                table
+                    tr
+                        th 
+                            h5
+                                <strong>Breakdown</strong>
+        tr 
+            th.columns.first.last
+                table
+                    tr
+                        th 
+                            p Your expenses includes the following
+
+//4.1 BREAKDOWN w PCT
+table.row
+    tbody
+        tr 
+            th.columns.first
+                table
+                    tr
+                        th.text-center.label.s Groceries
+            th.columns
+                table
+                    tr
+                        th.text-center.label.s Transport
+            th.columns
+                table
+                    tr
+                        th.text-center.label.s Eating Out
+            th.columns.last
+                table
+                    tr
+                        th.text-center.label.s Lifestyle
+        tr 
+            th.columns.first
+                table
+                    tr
+                        th 
+                            h2.text-center.pct #{breakdown.groceries}%
+            th.columns
+                table
+                    tr
+                        th 
+                            h2.text-center.pct #{breakdown.transport}%
+            th.columns
+                table
+                    tr
+                        th 
+                            h2.text-center.pct #{breakdown.eatingOut}%
+            th.columns.last
+                table
+                    tr
+                        th 
+                            h2.text-center.pct #{breakdown.lifestyle}%
+
+//4.2 
+table.row
+    tbody
+        tr
+            th.columns.first.last
+                table
+                    tr
+                        th which accumulates for #{breakdown.usage}% of your income. View further breakdown below.
+//4.3 Detailed
+table.row
+    tbody
+        tr 
+            th.columns.first
+                table
+                    tr
+                        th.text-right.label Spent
+            th.columns.last
+                table
+                    tr
+                        th.text-center 
+                            progress(value=breakdown.usage, max=100)
+                        th.text-left #{breakdown.usage}%
+
+        tr 
+            th.columns.first
+                table
+                    tr
+                        th.text-right.label Debt service
+            th.columns.last
+                table
+                    tr
+                        th.text-center
+                            progress(value=breakdown.debt, max=100)
+                        th.text-left #{breakdown.groceries}%
+        tr 
+            th.columns.first
+                table
+                    tr
+                        th.text-right.label Excess
+            th.columns.last
+                table
+                    tr
+                        th.text-center
+                            progress(value=breakdown.excess, max=100)
+                        th.text-left #{breakdown.excess}%

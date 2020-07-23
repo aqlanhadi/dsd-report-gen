@@ -1,0 +1,49 @@
+- var answered = debtIncomeRatio.answered
+
+table.row
+    tbody
+        tr 
+            th.columns.first.last.header
+                table
+                    tr
+                        th 
+                            h5
+                                <strong>Debt-Income Ratio</strong>
+
+
+table.row
+    tbody
+        unless answered === false
+            tr 
+                th.columns.first
+                    table
+                        tr
+                            th.text-center.label.s Debt
+                th.columns
+                    table
+                        tr
+                            th.text-center.label.s Income
+                th.columns
+                    table
+                        tr
+                            th.text-center.label.s Health
+            tr 
+                th.columns.first
+                    table
+                        tr
+                            th 
+                                h2.text-center.pct #{debtIncomeRatio.debtRatio}%
+                th.columns
+                    table
+                        tr
+                            th 
+                                h2.text-center.pct #{debtIncomeRatio.incomeRatio}%
+                th.columns
+                    table
+                        tr
+                            th 
+                                h2.text-center.pct #{debtIncomeRatio.health}
+        else
+            tr
+                th.columns.first.last You did not provide us with sufficient information for us to be able to calculate your Debt-Income Ratio.
+

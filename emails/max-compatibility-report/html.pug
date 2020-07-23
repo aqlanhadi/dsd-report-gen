@@ -1,0 +1,27 @@
+doctype html
+html
+    head
+        style
+            include styles/foundation-emails.css
+            include styles/custom.css
+    body
+        table.container
+            tbody
+                tr
+                    td
+                        //1. HEADER
+                        include components/header.pug
+                        //2. DISCLAIMER
+                        include components/disclaimer.pug
+                        //3. PROFILE
+                        include components/profile.pug
+                        //4. BREAKDOWN
+                        include components/breakdown.pug
+                        //5. DEBT-INCOME RATIO
+                        include components/debtIncomeRatio.pug
+                        //6. TIPS
+                        include components/tips.pug
+                        //7. CALL TO ACTION
+                        include components/cta.pug
+                        //8. FOOTER
+                        include components/footer.pug
