@@ -26,14 +26,24 @@ module.exports.profile = async (data) => {
         profile: 0,
         debtIncomeRatio: {}
     }
-
-    res.profile = PROFILE_DEFINITION[profiler(data.scores)-1]
+    
     res.debtIncomeRatio = getDIR(data.debt.service_pct)
+
+    if(res.debtIncomeRatio.answered) {
+        if(res.debtIncomeRatio.health === 'Healthy') {
+            res.profile = PROFILE_DEFINITION[profiler(data.scores, 2)-1]
+        }
+        if(res.debtIncomeRatio.health === 'At Risk') {
+            res.profile = PROFILE_DEFINITION[profiler(data.scores, 3)-1]
+        }
+    } else {
+        res.profile = PROFILE_DEFINITION[profiler(data.scores, 4)-1]
+    }
     
     return Promise.resolve(Object.assign({}, data, res))
 }
 
-function profiler(scores) {
+function profiler(scores, def) {
     var count = {'1': 0, '2': 0, '3': 0}
     //  Count min, med and max occurences
     Object.keys(scores).forEach((score, i) => {
@@ -41,7 +51,7 @@ function profiler(scores) {
     })
 
     //  Set default profile to highest
-    var profile = 4
+    var profile = def
 
     //  !!! This is where the profile gets decided. Change definitions here.
 
@@ -56,7 +66,7 @@ function profiler(scores) {
         profile = 3
     } else if (count[1] === 1) { // if there's only 1 categories in minimum: LEVEL 4 PROFILE
         //console.log("debtors")
-        profile = 4
+        profile = 3
     }
     return profile
 }

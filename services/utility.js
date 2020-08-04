@@ -13,9 +13,9 @@ const TRANSPORT_RESPONSE = {
 
 const INCOME_DEF = {
     'RM2,000 or less': 2000,
-    'RM2,001-RM4,000': 4000,
-    'RM4,001-RM6,000': 6000,
-    'RM6,001-RM8,000': 8000,
+    'RM2,001 - RM4,000': 4000,
+    'RM4,001 - RM6,000': 6000,
+    'RM6,001 - RM8,000': 8000,
     'More than RM8,000': 10000,
     'I prefer not to answer': -1
 }
@@ -35,6 +35,14 @@ const SAVE_PCT = {
     "I'm not sure": 0
 }
 
+const QIDS = {
+    'loan': 'rGuxY2m9lKzk',
+    'loan_list': 'pSmsF7MPrfOT',
+    'service_pct': 'NlXHIFWaN8xY',
+    'state': 'MMBD8ew3CQUR',
+    'district': 'vn1nuUXmieat'
+}
+
  /**
   * ======================================================================
   */
@@ -42,31 +50,31 @@ const SAVE_PCT = {
 module.exports.extractor = async (response) => {
 
     var res = {
-        name: response.hidden.name,
-        email: response.answers.slice(-1)[0].email,
+        name: response.hidden.name || '',
+        email: response.answers.slice(-1)[0].email || 'fallbackemail@halduit.com',
         scores: {
-            "groceries": parseScore('groceries', parseInt(response.hidden.gr)),
-            "transport": parseScore('transport', parseInt(response.hidden.tr)),
-            "eatingOut": parseScore('eatingOut', parseInt(response.hidden.eo)),
-            "lifestyle": parseScore('lifestyle', parseInt(response.hidden.hl))
+            "groceries": parseScore('groceries', parseInt(response.hidden.gr)) || 0,
+            "transport": parseScore('transport', parseInt(response.hidden.tr)) || 0,
+            "eatingOut": parseScore('eatingOut', parseInt(response.hidden.eo)) || 0,
+            "lifestyle": parseScore('lifestyle', parseInt(response.hidden.hl)) || 0
         },
-        spentOn:{
-            "groceries": parseInt(response.hidden.grt),
-            "transport": parseInt(parseTransport(response.hidden.trt)),
-            "eatingOut": parseInt(response.hidden.eot),
-            "hobbies": parseInt(response.hidden.ht),
-            "lifestyle": parseInt(response.hidden.lt)
+        spentOn:{ //Optionals -- if 0, the respondents have decided to skip
+            "groceries": parseInt(response.hidden.grt) || 0,
+            "transport": parseInt(parseTransport(response.hidden.trt)) || 0,
+            "eatingOut": parseInt(response.hidden.eot) || 0,
+            "hobbies": parseInt(response.hidden.ht) || 0,
+            "lifestyle": parseInt(response.hidden.lt) || 0
         },
         income: {
-            "savePercentage": SAVE_PCT[response.answers[0].choice.label],
-            "purchasePower": response.answers[1].choice.label,
-            "amount": INCOME_DEF[response.answers[3].choice.label]
+            "savePercentage": SAVE_PCT[response.answers[0].choice.label] || 0,      //* How much of your income do you save?
+            "purchasePower": response.answers[1].choice.label || 0,                 //* Can you afford an unexpected expense of RM 1000
+            "amount": INCOME_DEF[response.answers[3].choice.label] || 1             //* Income range
         },
         breakdown: null,
         debt: {
-            "loan_status": response.answers[6].choice.label,
-            "loan_list": 0,//if stat y/n response.answers[7].choices.labels,
-            "service_pct": SERVICE_PCT[response.answers[8].choice.label],
+            "loan_status": null,                   
+            "loan_list": null,    
+            "service_pct": -1,      // by default it set to not answered
             "amount": null,
         },
         excess: {
@@ -76,23 +84,36 @@ module.exports.extractor = async (response) => {
             amount: null
         },
         demographics: {
-            "age": response.answers[2].choice.label,
-            "employment_status": response.answers[4].choice.label,
-            "education_level": response.answers[5].choice.label,
-            "state": response.answers[9].choice.label,
-            "district": response.answers[10].choice.label
+            "age": response.answers[2].choice.label || 0,                           //*
+            "employment_status": response.answers[4].choice.label || 0,             //* Employment status
+            "education_level": response.answers[5].choice.label || 0,               //*
+            "state": null,                         
+            "district": null,                    
         }
     }
 
+    response.answers.forEach(answer => {
+        if (answer.field.id === QIDS['loan']) res.debt.loan_status = answer.choice.label
+        if (answer.field.id === QIDS['loan_list']) res.debt.loan_list = answer.choices.labels
+        if (answer.field.id === QIDS['service_pct']) res.debt.service_pct = SERVICE_PCT[answer.choice.label]
+        if (answer.field.id === QIDS['state']) res.demographics.state = answer.choice.label
+        if (answer.field.id === QIDS['district']) res.demographics.district = answer.choice.label
+    })
+
+    return Promise.resolve(res)
+}
+
+module.exports.calculateItemsFrom = async res => {
     var breakdown = calcBreakdown(res)
     res.breakdown = breakdown
-    res.debt.amount = SERVICE_PCT[response.answers[8].choice.label] * res.income.amount
+    res.debt.amount = res.debt.service_pct * res.income.amount
     res.excess.amount = (res.breakdown.excess * res.income.amount) / 100
     res.savings.amount = (res.breakdown.savings * res.income.amount) / 100
     return Promise.resolve(res)
 }
 
 function calcBreakdown(data) {
+    console.log('Calculating Breakdowns')
     var income = data.income.amount
     var groceries = percent(data.spentOn.groceries, income)
     var transport = percent(data.spentOn.transport, income)
@@ -129,7 +150,9 @@ function parseTransport(res) {
     return TRANSPORT_RESPONSE[res]
 }
 
+// Fallbacks
 function parseScore(from, data) {
+
     switch(from) {
         case 'groceries':
             return score(3, 6, 10, 12, data)
@@ -147,7 +170,7 @@ function parseScore(from, data) {
         if(score >= low && score < med) return 1
         if(score >= med && score < high) return 2
         if(score >= high && score <= highLimit) return 3
-        else return `unknown (${score})`
+        else return 0
     }
 }
 

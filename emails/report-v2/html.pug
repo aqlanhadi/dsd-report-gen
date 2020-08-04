@@ -1,0 +1,140 @@
+html
+    head
+        style(type='text/css').
+            .awl a {color: #FFFFFF; text-decora=
+            tion: none;} .abml a {color: #000000; font-family: Roboto-Medium,Helvetica,=
+            Arial,sans-serif; font-weight: bold; text-decoration: none;} .adgl a {color=
+            : rgba(0, 0, 0, 0.87); text-decoration: none;} .afal a {color: #b0b0b0; tex=
+            t-decoration: none;} @media screen and (min-width: 600px) {.v2sp {padding: =
+            6px 30px 0px;} .v2rsp {padding: 0px 10px;}} @media screen and (min-width: 6=
+            00px) {.mdv2rw {padding: 40px 40px;}}
+        link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Google+Sans")
+    body(style='margin: 0; padding: 0;' bgcolor='#FFFFFF')
+        table(width='100%' height='100%' style='min-width:348px;' border='0' cellspacing='0' cellpadding='0' lang='en')
+            tr(height='32' style='height: 32px;')
+                td
+            tr(align='center')
+                td
+                    table(border='0' cellspacing='0' style='padding-bottom: 20px; max-width: 600px; min-width: 220px')
+                        tr
+                            td
+                                div(style='border-style: solid; border-width: thin; border-color: #dadce0; border-radius: 8px; padding: 40px 20px;' align='center' class='mdv2rw')
+                                    img(src="https://halduit.com/wp-content/uploads/2020/07/cropped-HDLogo1-1.png" width='74' aria-hidden='true' style='margin-bottom: 16px;' alt="HalDuit")
+                                    div(style='font-family: Google Sans,Roboto, RobotoDraft,Helvetica,Arial,sans-serif; border-bottom: thin solid #dadce0; color: rgba(0,0,0,0.87);line-height: 32px; padding-bottom: 24px; padding-bottom: 32px; padding-top: 32px; text-align: center; word-break; break-word')
+                                        div(style='font-size=24px;')
+                                            table(style='font-size: 24px; line-height: 28px; text-align: center; width: 100%;')
+                                                tr
+                                                    td Hi #{name}! Your financial report is here.
+                                                tr
+                                                    td(style='font-size: 16px') Thank you for participating in our survey. Please keep in mind that the report only reflect approximate values based on your responses.
+
+                                    //- Profile
+                                    div(style='font-family: Roboto-Regular,Helvetica,Arial,sans-serif;  border-bottom: thin solid #dadce0; color: rgba(0,0,0,0.87);line-height: 32px; padding-bottom: 24px; padding-top: 32px; font-size: 14px; color: rgba(0,0,0,0.87) text-align: left;')
+                                        table(style='font-size: 14px; letter-spacing: 0.2; line-height: 20px; text-align: center;')
+                                            tr
+                                                td(style='padding-bottom: 24px; text-align: start;') 
+                                                    | You are a <strong>#{profile.name}</strong>.
+                                                    div(style='height: 13px;')
+                                                    | #{profile.defined_by}.
+                                                    div(style='height: 13px;')
+                                                    | <strong>What it means for your money:</strong> #{profile.means_for_money}.
+                                    
+                                    //- Breakdown
+                                    div(style='font-family: Roboto-Regular,Helvetica,Arial,sans-serif;  border-bottom: thin solid #dadce0; color: rgba(0,0,0,0.87);line-height: 32px; padding-bottom: 24px; font-size: 14px; color: rgba(0,0,0,0.87) text-align: left;')
+                                        p(style='font-size: 14px; letter-spacing: 0.2px; text-align: left;') <strong>Spending Breakdown</strong>
+                                        
+                                        table(style='font-size: 14px; letter-spacing: 0.2; padding: 0px 12px 6px 12px; line-height: 20px; text-align: center;')
+                                            tr
+                                                unless breakdown.groceries === 0
+                                                    td(style='padding:0px 12px 6px 0px; text-align: center;') 
+                                                        | Grocery
+                                                        div(style='font-size: 26px; padding-top: 12px;') #{breakdown.groceries}%
+                                                
+                                                unless breakdown.transport === 0
+                                                    td(style='padding:0px 12px 6px 0px; text-align: center;') 
+                                                        | Transport
+                                                        div(style='font-size: 26px; padding-top: 12px;') #{breakdown.transport}%
+                                                    
+                                                unless breakdown.eatingOut === 0
+                                                    td(style='padding:0px 12px 6px 0px; text-align: center;') 
+                                                        | Eating Out
+                                                        div(style='font-size: 26px; padding-top: 12px;') #{breakdown.eatingOut}%
+                                                
+                                                unless breakdown.lifestyle === 0
+                                                    td(style='padding:0px 12px 6px 0px; text-align: center;') 
+                                                        | Hobbies &amp; Lifestyle
+                                                        div(style='font-size: 26px; padding-top: 12px;') #{breakdown.lifestyle}%
+                                                    
+                                        table(style='font-size: 14px; letter-spacing: 0.2; line-height: 20px; text-align: center;')
+                                            tr
+                                                td Which makes up #{breakdown.usage}% of your income. Your income also breaks down to the following items:
+                                        
+                                        table(style='font-size: 14px; letter-spacing: 0.2; padding: 12px; line-height: 20px; text-align: center;')
+                                            tr
+                                                unless breakdown.debt === 0 
+                                                    unless breakdown.debt === -1
+                                                        td(style='padding:0px 12px 6px 0px; text-align: center;') 
+                                                            | Debt
+                                                            div(style='font-size: 26px; padding-top: 12px;') #{breakdown.debt}%
+                                                
+                                                unless breakdown.savings === 0
+                                                    td(style='padding:0px 12px 6px 0px; text-align: center;') 
+                                                        | Savings
+                                                        div(style='font-size: 26px; padding-top: 12px;') #{breakdown.savings}%
+                                                
+                                                unless breakdown.excess === 0
+                                                    td(style='padding:0px 12px 6px 0px; text-align: center;') 
+                                                        | Excess
+                                                        div(style='font-size: 26px; padding-top: 12px;') #{breakdown.excess}%
+                                    
+                                    //- DIR
+                                    div(style='font-family: Roboto-Regular,Helvetica,Arial,sans-serif;  border-bottom: thin solid #dadce0; color: rgba(0,0,0,0.87);line-height: 32px; padding-bottom: 24px; font-size: 14px; color: rgba(0,0,0,0.87) text-align: left;')
+                                        p(style='font-size: 14px; letter-spacing: 0.2; text-align: left;') <strong>Debt-Income Ratio</strong>
+                                        
+                                        unless debtIncomeRatio.answered === false
+                                            table(style='font-size: 14px; letter-spacing: 0.2; padding: 12px; line-height: 20px; text-align: center;')
+                                                tr
+                                                    td(style='padding:0px 12px 6px 0px; text-align: center;') 
+                                                        | Debt
+                                                        div(style='font-size: 26px; padding-top: 12px;') #{debtIncomeRatio.debtRatio}%
+                                                    td(style='padding:0px 12px 6px 0px; text-align: center;') 
+                                                        | Income
+                                                        div(style='font-size: 26px; padding-top: 12px;') #{debtIncomeRatio.incomeRatio}%
+                                                    td(style='padding:0px 12px 6px 0px; text-align: center;') 
+                                                        | Health
+                                                        div(style='font-size: 26px; padding-top: 12px; text-transform: capitalize;') #{debtIncomeRatio.health}
+                                        else
+                                            table(style='font-size: 14px; letter-spacing: 0.2; line-height: 20px; text-align: center;')
+                                                tr
+                                                    td(style='padding-bottom: 24px; text-align: start;') 
+                                                        | You did not provide us with enough information for us to calculate your debt-to-income ratio.
+                                                    
+
+                                    //- Tips
+                                    div(style='font-family: Roboto-Regular,Helvetica,Arial,sans-serif; font-size: 14px; color: rgba(0,0,0,0.87) line-height: 20px; padding-top: 20px; text-align: left;')
+                                        table(style='font-size: 14px; letter-spacing: 0.2; line-height: 20px; text-align: center;')
+                                            tr
+                                                td(style='padding-bottom: 24px; text-align: start;') 
+                                                    | <strong>Tips on Managing Your Money</strong>
+                                                    div(style='height: 13px;')
+                                                    each tip in profile.tips
+                                                        | <strong>#{tip.title}:</strong> #{tip.description}.
+                                                        div(style='height: 13px;')
+                                            tr
+                                                td(style='padding-bottom: 12px; text-align: start;')
+                                                    div(style='height: 13px;')
+                                                    | Follow us on Instagram at #[a(href='https://www.instagram.com/halduit/') @halduit] for more financial tips and tricks! Share this questionnaires among your friends and family and find out how they rank against you! Happy Saving!
+                                            tr
+                                                td(style='padding-bottom: 18px; text-align: start; font-style: italic; color: rgba(0,0,0,0.54)')
+                                                    | - The HalDuit Team
+                        
+                                div(style='text-align: center;')
+                                    div(style='font-family: Roboto-Regular,Helvetica,Arial,sans-serif; color: rgba(0,0,0,0.54); font-size: 11px; line-height: 18px; padding-top: 12px; text-align: center;')
+                                        div You received this email because you participated in HalDuit's financial survey.
+                                        div(style='direction: ltr') &copy; 2020 HalDuit, 100 Jalan Tun Perak, Kuala Lumpur
+                
+                                    
+                                                
+                                                    
+                                                
+

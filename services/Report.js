@@ -11,15 +11,23 @@ class Report {
     }
 
     async initialize(body) {
-        //console.log('Received Data:', body)
+        console.log('\tHidden Data:', JSON.stringify(body.hidden))
+        console.log('\tResponse Data:', JSON.stringify(body.answers))
+    
         return await utility.extractor(body)
+            .then(async extractedData => {
+                return await utility.calculateItemsFrom(extractedData)
+            })
             .then(async (extractedData) => {
+                console.log('Before profiled', extractedData)
                 return await profiler.profile(extractedData)
-            }).then(async (profile) => {
+            })
+            .then(async (profile) => {
                 this.data = profile
-                console.log(`Response profiled.`)
+                console.log(`Response profiled.`, profile)
                 return Promise.resolve(this.data)
-            }).catch((e) => {console.error(e)})
+            })
+            .catch((e) => {console.error(e)})
     }
 
     async sendEmail() {

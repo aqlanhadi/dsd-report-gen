@@ -1,10 +1,11 @@
 const Email = require('email-templates')
 
 module.exports.send = async (data) => {
-    console.log('Processed Data: ',data)
+    console.log('Processed Data: ',JSON.stringify(data))
+
     const email = new Email({
         message: {
-            from: process.env.MAIL_USER
+            from: `HalDuit <${process.env.MAIL_USER}>`,
         },
         send: true,
         transport: {
@@ -21,7 +22,7 @@ module.exports.send = async (data) => {
     })
 
     return await email.send({
-        template: 'max-compatibility-report',
+        template: 'report-v2',
         message: {
             to: data.email
         },

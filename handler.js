@@ -7,7 +7,7 @@ const responseHandler = require('./services/responseHandler')
 
 app.use(bodyParser.json())
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3200
 
 app.post('/hook', async (req, res) => {
     
