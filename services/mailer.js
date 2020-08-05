@@ -7,7 +7,7 @@ module.exports.send = async (data) => {
         message: {
             from: `HalDuit <${process.env.MAIL_USER}>`,
         },
-        send: true,
+        send: false,
         transport: {
             host: process.env.MAIL_HOST,
             port: process.env.MAIL_PORT,
@@ -22,7 +22,7 @@ module.exports.send = async (data) => {
     })
 
     return await email.send({
-        template: 'report-v2',
+        template: 'report',
         message: {
             to: data.email
         },
