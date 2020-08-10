@@ -1,0 +1,6 @@
+static/* linguist-vendored
+staticfiles/* linguist-vendored
+emails/max-compatibility-report/* linguist-vendored
+emails/report/* linguist-vendored
+assets/* linguist-vendored
+emails/mail-template-test.html linguist-vendored

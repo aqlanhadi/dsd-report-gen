@@ -17,7 +17,7 @@ const INCOME_DEF = {
     'RM4,001 - RM6,000': 6000,
     'RM6,001 - RM8,000': 8000,
     'More than RM8,000': 10000,
-    'I prefer not to answer': -1
+    'I prefer not to answer': 0
 }
 
 const SERVICE_PCT = {
@@ -68,7 +68,7 @@ module.exports.extractor = async (response) => {
         income: {
             "savePercentage": SAVE_PCT[response.answers[0].choice.label] || 0,      //* How much of your income do you save?
             "purchasePower": response.answers[1].choice.label || 0,                 //* Can you afford an unexpected expense of RM 1000
-            "amount": INCOME_DEF[response.answers[3].choice.label] || 1             //* Income range
+            "amount": INCOME_DEF[response.answers[3].choice.label] || 0             //* Income range -- can be -1
         },
         breakdown: null,
         debt: {
@@ -106,7 +106,7 @@ module.exports.extractor = async (response) => {
 module.exports.calculateItemsFrom = async res => {
     var breakdown = calcBreakdown(res)
     res.breakdown = breakdown
-    res.debt.amount = res.debt.service_pct * res.income.amount
+    res.debt.amount = res.debt.service_pct * res.income.amount // res.debt.service_pct can be -1
     res.excess.amount = (res.breakdown.excess * res.income.amount) / 100
     res.savings.amount = (res.breakdown.savings * res.income.amount) / 100
     return Promise.resolve(res)
@@ -115,6 +115,13 @@ module.exports.calculateItemsFrom = async res => {
 function calcBreakdown(data) {
     console.log('Calculating Breakdowns')
     var income = data.income.amount
+
+    if (!income) {
+        return {
+            status: 0
+        }
+    }
+
     var groceries = percent(data.spentOn.groceries, income)
     var transport = percent(data.spentOn.transport, income)
     var eatingOut = percent(data.spentOn.eatingOut, income)
@@ -131,6 +138,7 @@ function calcBreakdown(data) {
     var usage = 100 - excess
 
     return {
+        status: 1,
         groceries: round(groceries),
         transport: round(transport),
         eatingOut: round(eatingOut),

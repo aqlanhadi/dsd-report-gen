@@ -22,7 +22,7 @@ module.exports.send = async (data) => {
     })
 
     return await email.send({
-        template: 'report',
+        template: 'report-v2',
         message: {
             to: data.email
         },
@@ -30,8 +30,16 @@ module.exports.send = async (data) => {
     })
     .then((log) => {
         console.log(`Status: `, log.response)
-        if (log.accepted.length > 0) console.log(`Accepted: `,log.accepted)
-        if (log.rejected.length > 0) console.log(`Rejected: `,log.rejected)
+        try {
+            if (log.accepted.length > 0) console.log(`Accepted: `,log.accepted)
+        } catch(e) {
+            console.log('No accepted emails.')
+        }
+        try {
+            if (log.rejected.length > 0) console.log(`Rejected: `,log.rejected)
+        } catch(e) {
+            console.log('No rejected emails.')
+        }
     })
     .catch(console.error)
 }

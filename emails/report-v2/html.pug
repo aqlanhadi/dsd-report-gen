@@ -43,49 +43,55 @@ html
                                     div(style='font-family: Roboto-Regular,Helvetica,Arial,sans-serif;  border-bottom: thin solid #dadce0; color: rgba(0,0,0,0.87);line-height: 32px; padding-bottom: 24px; font-size: 14px; color: rgba(0,0,0,0.87) text-align: left;')
                                         p(style='font-size: 14px; letter-spacing: 0.2px; text-align: left;') <strong>Spending Breakdown</strong>
                                         
-                                        table(style='font-size: 14px; letter-spacing: 0.2; padding: 0px 12px 6px 12px; line-height: 20px; text-align: center;')
-                                            tr
-                                                unless breakdown.groceries === 0
-                                                    td(style='padding:0px 12px 6px 0px; text-align: center;') 
-                                                        | Grocery
-                                                        div(style='font-size: 26px; padding-top: 12px;') #{breakdown.groceries}%
-                                                
-                                                unless breakdown.transport === 0
-                                                    td(style='padding:0px 12px 6px 0px; text-align: center;') 
-                                                        | Transport
-                                                        div(style='font-size: 26px; padding-top: 12px;') #{breakdown.transport}%
-                                                    
-                                                unless breakdown.eatingOut === 0
-                                                    td(style='padding:0px 12px 6px 0px; text-align: center;') 
-                                                        | Eating Out
-                                                        div(style='font-size: 26px; padding-top: 12px;') #{breakdown.eatingOut}%
-                                                
-                                                unless breakdown.lifestyle === 0
-                                                    td(style='padding:0px 12px 6px 0px; text-align: center;') 
-                                                        | Hobbies &amp; Lifestyle
-                                                        div(style='font-size: 26px; padding-top: 12px;') #{breakdown.lifestyle}%
-                                                    
-                                        table(style='font-size: 14px; letter-spacing: 0.2; line-height: 20px; text-align: center;')
-                                            tr
-                                                td Which makes up #{breakdown.usage}% of your income. Your income also breaks down to the following items:
-                                        
-                                        table(style='font-size: 14px; letter-spacing: 0.2; padding: 12px; line-height: 20px; text-align: center;')
-                                            tr
-                                                unless breakdown.debt === 0 
-                                                    unless breakdown.debt === -1
+                                        unless breakdown.status === 0
+                                            table(style='font-size: 14px; letter-spacing: 0.2; padding: 0px 12px 6px 12px; line-height: 20px; text-align: center;')
+                                                tr
+                                                    unless breakdown.groceries === 0
                                                         td(style='padding:0px 12px 6px 0px; text-align: center;') 
-                                                            | Debt
-                                                            div(style='font-size: 26px; padding-top: 12px;') #{breakdown.debt}%
-                                                
-                                                unless breakdown.savings === 0
-                                                    td(style='padding:0px 12px 6px 0px; text-align: center;') 
-                                                        | Savings
-                                                        div(style='font-size: 26px; padding-top: 12px;') #{breakdown.savings}%
-                                                
-                                                unless breakdown.excess === 0
-                                                    td(style='padding:0px 12px 6px 0px; text-align: center;') 
-                                                        | Excess
-                                                        div(style='font-size: 26px; padding-top: 12px;') #{breakdown.excess}%
+                                                            | Grocery
+                                                            div(style='font-size: 26px; padding-top: 12px;') #{breakdown.groceries}%
+                                                    
+                                                    unless breakdown.transport === 0
+                                                        td(style='padding:0px 12px 6px 0px; text-align: center;') 
+                                                            | Transport
+                                                            div(style='font-size: 26px; padding-top: 12px;') #{breakdown.transport}%
+                                                        
+                                                    unless breakdown.eatingOut === 0
+                                                        td(style='padding:0px 12px 6px 0px; text-align: center;') 
+                                                            | Eating Out
+                                                            div(style='font-size: 26px; padding-top: 12px;') #{breakdown.eatingOut}%
+                                                    
+                                                    unless breakdown.lifestyle === 0
+                                                        td(style='padding:0px 12px 6px 0px; text-align: center;') 
+                                                            | Hobbies &amp; Lifestyle
+                                                            div(style='font-size: 26px; padding-top: 12px;') #{breakdown.lifestyle}%
+                                                        
+                                            table(style='font-size: 14px; letter-spacing: 0.2; line-height: 20px; text-align: center;')
+                                                tr
+                                                    td Which makes up #{breakdown.usage}% of your income. Your income also breaks down to the following items:
+                                            
+                                            table(style='font-size: 14px; letter-spacing: 0.2; padding: 12px; line-height: 20px; text-align: center;')
+                                                tr
+                                                    unless breakdown.debt === 0 
+                                                        unless breakdown.debt === -1
+                                                            td(style='padding:0px 12px 6px 0px; text-align: center;') 
+                                                                | Debt
+                                                                div(style='font-size: 26px; padding-top: 12px;') #{breakdown.debt}%
+                                                    
+                                                    unless breakdown.savings === 0
+                                                        td(style='padding:0px 12px 6px 0px; text-align: center;') 
+                                                            | Savings
+                                                            div(style='font-size: 26px; padding-top: 12px;') #{breakdown.savings}%
+                                                    
+                                                    unless breakdown.excess === 0
+                                                        td(style='padding:0px 12px 6px 0px; text-align: center;') 
+                                                            | Excess
+                                                            div(style='font-size: 26px; padding-top: 12px;') #{breakdown.excess}%
+                                        else
+                                            table(style='font-size: 14px; letter-spacing: 0.2; line-height: 20px; text-align: center; font-style: italic; color: rgba(0,0,0,0.54);')
+                                                tr
+                                                    td We can't calculate your spending breakdown as you have not provided us with your income data.
+
                                     
                                     //- DIR
                                     div(style='font-family: Roboto-Regular,Helvetica,Arial,sans-serif;  border-bottom: thin solid #dadce0; color: rgba(0,0,0,0.87);line-height: 32px; padding-bottom: 24px; font-size: 14px; color: rgba(0,0,0,0.87) text-align: left;')
@@ -106,7 +112,7 @@ html
                                         else
                                             table(style='font-size: 14px; letter-spacing: 0.2; line-height: 20px; text-align: center;')
                                                 tr
-                                                    td(style='padding-bottom: 24px; text-align: start;') 
+                                                    td(style='padding-bottom: 24px; text-align: start; font-style: italic; color: rgba(0,0,0,0.54);') 
                                                         | You did not provide us with enough information for us to calculate your debt-to-income ratio.
                                                     
 
